@@ -44,7 +44,9 @@ func InitMetrics() {
 	if config.Metrics.FetchRunners {
 		prometheus.MustRegister(runnersGauge)
 		prometheus.MustRegister(runnersOrganizationGauge)
-		prometheus.MustRegister(runnersEnterpriseGauge)
+		if config.EnterpriseName == "" {
+			prometheus.MustRegister(runnersEnterpriseGauge)
+		}
 	}
 	prometheus.MustRegister(workflowRunStatusGauge)
 	prometheus.MustRegister(workflowRunDurationGauge)

@@ -48,9 +48,6 @@ func getAllEnterpriseRunners() []*github.Runner {
 }
 
 func getRunnersEnterpriseFromGithub() {
-	if config.EnterpriseName == "" {
-		return
-	}
 	for {
 		runners := getAllEnterpriseRunners()
 
