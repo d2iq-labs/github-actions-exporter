@@ -17,6 +17,7 @@ var (
 	}
 	Metrics struct {
 		FetchWorkflowRunUsage bool
+		FetchRunners bool
 	}
 	Port           int
 	Debug          bool
@@ -126,6 +127,13 @@ func InitConfiguration() []cli.Flag {
 			Value:       100 * 1024 * 1024,
 			Usage:       "Size of Github HTTP cache in bytes",
 			Destination: &Github.CacheSizeBytes,
+		},
+		&cli.BoolFlag{
+			Name:        "fetch_runners",
+			EnvVars:     []string{"FETCH_RUNNERS"},
+			Usage:       "When true, will fetch information related to runners",
+			Value:       true,
+			Destination: &Metrics.FetchRunners,
 		},
 	}
 }

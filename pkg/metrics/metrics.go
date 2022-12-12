@@ -41,12 +41,14 @@ func InitMetrics() {
 		},
 		strings.Split(config.WorkflowFields, ","),
 	)
-	prometheus.MustRegister(runnersGauge)
-	prometheus.MustRegister(runnersOrganizationGauge)
+	if config.Metrics.FetchRunners {
+		prometheus.MustRegister(runnersGauge)
+		prometheus.MustRegister(runnersOrganizationGauge)
+		prometheus.MustRegister(runnersEnterpriseGauge)
+	}
 	prometheus.MustRegister(workflowRunStatusGauge)
 	prometheus.MustRegister(workflowRunDurationGauge)
 	prometheus.MustRegister(workflowBillGauge)
-	prometheus.MustRegister(runnersEnterpriseGauge)
 
 	client, err = NewClient()
 	if err != nil {
@@ -62,10 +64,14 @@ func InitMetrics() {
 	}
 
 	go getBillableFromGithub()
-	go getRunnersFromGithub()
-	go getRunnersOrganizationFromGithub()
+	if config.Metrics.FetchRunners {
+		go getRunnersFromGithub()
+		go getRunnersOrganizationFromGithub()
+		if config.EnterpriseName == "" {
+			go getRunnersEnterpriseFromGithub()
+		}
+	}
 	go getWorkflowRunsFromGithub()
-	go getRunnersEnterpriseFromGithub()
 }
 
 // NewClient creates a Github Client
