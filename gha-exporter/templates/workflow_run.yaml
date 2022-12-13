@@ -11,65 +11,51 @@ data:
       "list": [
         {
           "builtIn": 1,
-          "datasource": "-- Grafana --",
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
           "enable": true,
           "hide": true,
           "iconColor": "rgba(0, 211, 255, 1)",
           "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
           "type": "dashboard"
         }
       ]
     },
-    "description": "This dashboard leverages the Prometheus exporter I wrote to fetch information about GitLab CI pipelines statuses. More information here: https://github.com/mvisonneau/gitlab-ci-pipelines-exporter",
+    "description": "Github Action statastics",
     "editable": true,
+    "fiscalYearStartMonth": 0,
     "gnetId": 10620,
     "graphTooltip": 0,
-    "iteration": 1604494784447,
     "links": [],
+    "liveNow": false,
     "panels": [
       {
-        "datasource": null,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
         "fieldConfig": {
           "defaults": {
-            "custom": {}
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 3,
-          "w": 2,
-          "x": 0,
-          "y": 0
-        },
-        "id": 116,
-        "options": {
-          "content": "<p style=\"text-align:center;\"><img src=\"https://www.cloudfoundry.org/wp-content/uploads/2017/10/icon_gitlab_cf@2x.png\" width=80px/></p>",
-          "mode": "html"
-        },
-        "pluginVersion": "7.3.1",
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "",
-        "transparent": true,
-        "type": "text"
-      },
-      {
-        "cacheTimeout": null,
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "custom": {},
             "decimals": 0,
             "mappings": [
               {
-                "id": 0,
-                "op": "=",
-                "text": "N/A",
-                "type": 1,
-                "value": "null"
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
               }
             ],
-            "nullValueMode": "connected",
             "thresholds": {
               "mode": "absolute",
               "steps": [
@@ -93,7 +79,6 @@ data:
           "y": 0
         },
         "id": 107,
-        "interval": null,
         "links": [],
         "maxDataPoints": 100,
         "options": {
@@ -115,9 +100,13 @@ data:
           },
           "textMode": "auto"
         },
-        "pluginVersion": "7.3.1",
+        "pluginVersion": "9.3.0",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
             "expr": "count(gitlab_ci_pipeline_job_run_count{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\"})",
             "format": "time_series",
             "hide": false,
@@ -128,28 +117,28 @@ data:
             "refId": "A"
           }
         ],
-        "timeFrom": null,
-        "timeShift": null,
         "title": "JOBS #",
         "type": "stat"
       },
       {
-        "cacheTimeout": null,
-        "datasource": null,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
         "fieldConfig": {
           "defaults": {
-            "custom": {},
             "decimals": 0,
             "mappings": [
               {
-                "id": 0,
-                "op": "=",
-                "text": "N/A",
-                "type": 1,
-                "value": "null"
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
               }
             ],
-            "nullValueMode": "connected",
             "thresholds": {
               "mode": "absolute",
               "steps": [
@@ -177,7 +166,6 @@ data:
           "y": 0
         },
         "id": 117,
-        "interval": null,
         "links": [],
         "maxDataPoints": 100,
         "options": {
@@ -199,9 +187,13 @@ data:
           },
           "textMode": "auto"
         },
-        "pluginVersion": "7.3.1",
+        "pluginVersion": "9.3.0",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
             "expr": "count(gitlab_ci_pipeline_job_status{status=\"failed\", project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\"} > 0) or vector(0)",
             "format": "time_series",
             "instant": false,
@@ -211,28 +203,28 @@ data:
             "refId": "A"
           }
         ],
-        "timeFrom": null,
-        "timeShift": null,
         "title": "FAILED JOBS #",
         "type": "stat"
       },
       {
-        "cacheTimeout": null,
-        "datasource": null,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
         "fieldConfig": {
           "defaults": {
-            "custom": {},
             "decimals": 0,
             "mappings": [
               {
-                "id": 0,
-                "op": "=",
-                "text": "N/A",
-                "type": 1,
-                "value": "null"
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
               }
             ],
-            "nullValueMode": "connected",
             "thresholds": {
               "mode": "absolute",
               "steps": [
@@ -256,7 +248,6 @@ data:
           "y": 0
         },
         "id": 118,
-        "interval": null,
         "links": [],
         "maxDataPoints": 100,
         "options": {
@@ -278,9 +269,13 @@ data:
           },
           "textMode": "auto"
         },
-        "pluginVersion": "7.3.1",
+        "pluginVersion": "9.3.0",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
             "expr": "sum(increase(gitlab_ci_pipeline_job_run_count{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\"}[1h]))",
             "format": "time_series",
             "instant": false,
@@ -290,22 +285,27 @@ data:
             "refId": "A"
           }
         ],
-        "timeFrom": null,
-        "timeShift": null,
         "title": "RUNS # (in the last hour)",
         "type": "stat"
       },
       {
-        "colors": [
-          "#299c46",
-          "rgba(237, 129, 40, 0.89)",
-          "#d44a3a",
-          "#4040a0"
-        ],
-        "datasource": null,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
         "fieldConfig": {
           "defaults": {
-            "custom": {}
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ]
           },
           "overrides": []
         },
@@ -317,7 +317,6 @@ data:
         },
         "id": 110,
         "links": [],
-        "mappingType": 1,
         "mappingTypes": [
           {
             "name": "value to text",
@@ -328,84 +327,83 @@ data:
             "value": 2
           }
         ],
-        "polystat": {
-          "animationSpeed": 2500,
-          "columnAutoSize": true,
-          "columns": "",
-          "defaultClickThrough": "",
-          "defaultClickThroughNewTab": false,
-          "defaultClickThroughSanitize": false,
-          "displayLimit": "",
-          "fontAutoColor": true,
-          "fontAutoScale": true,
-          "fontSize": 4,
-          "fontType": "Roboto",
+        "options": {
+          "autoSizeColumns": true,
+          "autoSizePolygons": true,
+          "autoSizeRows": true,
+          "compositeConfig": {
+            "animationSpeed": "2500",
+            "composites": [],
+            "enabled": true
+          },
+          "ellipseCharacters": 18,
+          "ellipseEnabled": false,
+          "globalAutoScaleFonts": true,
+          "globalClickthrough": "",
+          "globalClickthroughNewTabEnabled": false,
+          "globalClickthroughSanitizedEnabled": false,
           "globalDecimals": 2,
           "globalDisplayMode": "all",
           "globalDisplayTextTriggeredEmpty": "OK",
-          "globalOperatorName": "current",
-          "globalThresholds": [
+          "globalFillColor": "#0a50a1",
+          "globalFontSize": 4,
+          "globalGradientsEnabled": true,
+          "globalOperator": "last",
+          "globalPolygonBorderColor": "#10111c",
+          "globalPolygonBorderSize": 1,
+          "globalPolygonSize": 50,
+          "globalRegexPattern": "",
+          "globalShape": "hexagon_pointed_top",
+          "globalShowValueEnabled": true,
+          "globalTextFontAutoColor": "#000000",
+          "globalTextFontAutoColorEnabled": true,
+          "globalTextFontColor": "#000000",
+          "globalThresholdsConfig": [
             {
-              "$$hashKey": "object:465",
-              "color": "#299c46",
-              "state": 0,
+              "color": "#d44a3a",
+              "state": 2,
+              "value": 0
+            },
+            {
+              "color": "#797c7a",
+              "state": 3,
               "value": 1
             },
             {
-              "$$hashKey": "object:472",
-              "color": "#3274D9",
-              "state": 3,
+              "color": "#299c46",
+              "state": 0,
               "value": 2
-            },
-            {
-              "$$hashKey": "object:478",
-              "color": "#d44a3a",
-              "state": 2,
-              "value": 3
-            },
-            {
-              "$$hashKey": "object:475",
-              "color": "#929292",
-              "state": 3,
-              "value": 4
             }
           ],
+          "globalTooltipsEnabled": true,
+          "globalTooltipsShowTimestampEnabled": true,
           "globalUnitFormat": "short",
-          "gradientEnabled": true,
-          "hexagonSortByDirection": 1,
-          "hexagonSortByField": "name",
-          "maxMetrics": 0,
-          "polygonBorderColor": "#10111c",
-          "polygonBorderSize": 1,
-          "polygonGlobalFillColor": "#0a50a1",
-          "radius": "",
-          "radiusAutoSize": true,
-          "rowAutoSize": false,
-          "rows": 8,
-          "shape": "hexagon_pointed_top",
+          "layoutDisplayLimit": 100,
+          "layoutNumColumns": 8,
+          "layoutNumRows": 8,
+          "overrideConfig": {
+            "overrides": []
+          },
+          "panelId": 0,
+          "radius": 100,
+          "sortByDirection": 1,
+          "sortByField": "name",
           "tooltipDisplayMode": "all",
           "tooltipDisplayTextTriggeredEmpty": "OK",
-          "tooltipFontSize": 12,
-          "tooltipFontType": "Roboto",
+          "tooltipPrimarySortByField": "thresholdLevel",
           "tooltipPrimarySortDirection": 2,
-          "tooltipPrimarySortField": "thresholdLevel",
-          "tooltipSecondarySortDirection": 2,
-          "tooltipSecondarySortField": "value",
-          "tooltipTimestampEnabled": false,
-          "valueEnabled": false
+          "tooltipSecondarySortByField": "value",
+          "tooltipSecondarySortDirection": 2
         },
-        "rangeMaps": [
-          {
-            "from": "null",
-            "text": "N/A",
-            "to": "null"
-          }
-        ],
-        "savedComposites": [],
-        "savedOverrides": [],
+        "pluginVersion": "2.0.4",
         "targets": [
           {
-            "expr": "(gitlab_ci_pipeline_job_status{status=\"success\", project=~\"($OWNER).*\", ref=~\"$REF\", job_name=~\"$JOB\"} * 1 > 0) or (gitlab_ci_pipeline_job_status{status=\"running\", project=~\"($OWNER).*\", ref=~\"$REF\", job_name=~\"$JOB\"} * 2 > 0) or (gitlab_ci_pipeline_job_status{status=~\"failed|canceled\", project=~\"($OWNER).*\", ref=~\"$REF\", job_name=~\"$JOB\"} * 3 > 0) or (gitlab_ci_pipeline_job_status{status!~\"success|running|failed|canceled\", project=~\"($OWNER).*\", ref=~\"$REF\", job_name=~\"$JOB\"} * 4 > 0)",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "expr": "(gha_jobs_status{status=\"success\", project=~\"($OWNER).*\", ref=~\"$REF\", job_name=~\"$JOB\"} ) or (gha_jobs_status{status=\"failure\", project=~\"($OWNER).*\", ref=~\"$REF\", job_name=~\"$JOB\"}) or (gha_jobs_status{status=~\"failure|timed_out\", project=~\"($OWNER).*\", ref=~\"$REF\", job_name=~\"$JOB\"} ) or (gha_jobs_status{status!~\"success|failure|timed_out\", project=~\"($OWNER).*\", ref=~\"$REF\", job_name=~\"$JOB\"})",
             "format": "time_series",
             "hide": false,
             "instant": true,
@@ -414,36 +412,28 @@ data:
             "refId": "A"
           }
         ],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "",
         "transparent": true,
-        "type": "grafana-polystat-panel",
-        "valueMaps": [
-          {
-            "op": "=",
-            "text": "N/A",
-            "value": "null"
-          }
-        ]
+        "type": "grafana-polystat-panel"
       },
       {
-        "cacheTimeout": null,
-        "datasource": null,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
         "fieldConfig": {
           "defaults": {
-            "custom": {},
             "decimals": 0,
             "mappings": [
               {
-                "id": 0,
-                "op": "=",
-                "text": "N/A",
-                "type": 1,
-                "value": "null"
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
               }
             ],
-            "nullValueMode": "connected",
             "thresholds": {
               "mode": "absolute",
               "steps": [
@@ -472,7 +462,6 @@ data:
           "y": 3
         },
         "id": 108,
-        "interval": null,
         "links": [],
         "maxDataPoints": 100,
         "options": {
@@ -494,9 +483,13 @@ data:
           },
           "textMode": "auto"
         },
-        "pluginVersion": "7.3.1",
+        "pluginVersion": "9.3.0",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
             "expr": "avg(time() - gitlab_ci_pipeline_job_timestamp{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\"})",
             "format": "time_series",
             "interval": "",
@@ -505,28 +498,28 @@ data:
             "refId": "A"
           }
         ],
-        "timeFrom": null,
-        "timeShift": null,
         "title": "Average Job Run Frequency",
         "type": "stat"
       },
       {
-        "cacheTimeout": null,
-        "datasource": null,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
         "fieldConfig": {
           "defaults": {
-            "custom": {},
             "decimals": 0,
             "mappings": [
               {
-                "id": 0,
-                "op": "=",
-                "text": "N/A",
-                "type": 1,
-                "value": "null"
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
               }
             ],
-            "nullValueMode": "connected",
             "thresholds": {
               "mode": "absolute",
               "steps": [
@@ -555,7 +548,6 @@ data:
           "y": 3
         },
         "id": 106,
-        "interval": null,
         "links": [],
         "maxDataPoints": 100,
         "options": {
@@ -577,9 +569,13 @@ data:
           },
           "textMode": "auto"
         },
-        "pluginVersion": "7.3.1",
+        "pluginVersion": "9.3.0",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
             "expr": "avg(gitlab_ci_pipeline_job_duration_seconds{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\"})",
             "format": "time_series",
             "interval": "",
@@ -588,8 +584,6 @@ data:
             "refId": "A"
           }
         ],
-        "timeFrom": null,
-        "timeShift": null,
         "title": "Average Job Duration",
         "type": "stat"
       },
@@ -598,14 +592,11 @@ data:
         "bars": true,
         "dashLength": 10,
         "dashes": false,
-        "datasource": null,
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "custom": {}
-          },
-          "overrides": []
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
         },
+        "description": "",
         "fill": 1,
         "fillGradient": 0,
         "gridPos": {
@@ -635,7 +626,7 @@ data:
           "alertThreshold": false
         },
         "percentage": false,
-        "pluginVersion": "7.3.1",
+        "pluginVersion": "9.3.0",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -645,6 +636,10 @@ data:
         "steppedLine": false,
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
             "expr": "sum(increase(gitlab_ci_pipeline_job_run_count{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\"}[1m])) by (project, ref, job_name) / sum(increase(gitlab_ci_pipeline_job_run_count{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\"}[1m])) by (project, ref, job_name)",
             "format": "time_series",
             "instant": false,
@@ -653,9 +648,7 @@ data:
           }
         ],
         "thresholds": [],
-        "timeFrom": null,
         "timeRegions": [],
-        "timeShift": null,
         "title": "JOBS RUNS",
         "tooltip": {
           "shared": true,
@@ -664,37 +657,32 @@ data:
         },
         "type": "graph",
         "xaxis": {
-          "buckets": null,
           "mode": "time",
-          "name": null,
           "show": true,
           "values": []
         },
         "yaxes": [
           {
             "format": "short",
-            "label": null,
             "logBase": 1,
-            "max": null,
             "min": "0",
             "show": true
           },
           {
             "format": "short",
-            "label": null,
             "logBase": 1,
-            "max": null,
-            "min": null,
             "show": true
           }
         ],
         "yaxis": {
-          "align": false,
-          "alignLevel": null
+          "align": false
         }
       },
       {
-        "datasource": null,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -703,18 +691,11 @@ data:
             "custom": {
               "align": "center",
               "displayMode": "auto",
-              "filterable": false
+              "filterable": false,
+              "inspect": false
             },
             "links": [],
-            "mappings": [
-              {
-                "from": "",
-                "id": 1,
-                "text": "",
-                "to": "",
-                "type": 1
-              }
-            ],
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
@@ -773,12 +754,12 @@ data:
                   "id": "mappings",
                   "value": [
                     {
-                      "from": "",
-                      "id": 1,
-                      "text": "SUCCESS",
-                      "to": "",
-                      "type": 1,
-                      "value": "1"
+                      "options": {
+                        "1": {
+                          "text": "SUCCESS"
+                        }
+                      },
+                      "type": "value"
                     }
                   ]
                 }
@@ -903,6 +884,13 @@ data:
         "id": 103,
         "links": [],
         "options": {
+          "footer": {
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
           "showHeader": true,
           "sortBy": [
             {
@@ -911,9 +899,13 @@ data:
             }
           ]
         },
-        "pluginVersion": "7.3.1",
+        "pluginVersion": "9.3.0",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
             "expr": "-max(time() - gitlab_ci_pipeline_job_timestamp{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\"}) by (project, ref, job_name, kind) unless max(gitlab_ci_pipeline_job_status{status!~\"success\", project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\"}) by (project, ref, job_name, kind) > 0",
             "format": "table",
             "hide": false,
@@ -924,6 +916,10 @@ data:
             "refId": "B"
           },
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
             "expr": "max(gitlab_ci_pipeline_job_duration_seconds{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\"}) by (project, ref, job_name, kind) unless (max(gitlab_ci_pipeline_job_status{status!~\"success\", project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\"}) by (project, ref, job_name, kind) > 0)",
             "format": "table",
             "hide": false,
@@ -934,6 +930,10 @@ data:
             "refId": "C"
           },
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
             "expr": "max(gitlab_ci_pipeline_job_id{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\"}) by (project, ref, kind, job_name) unless (max(gitlab_ci_pipeline_job_status{status!~\"success\", project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\"}) by (project, ref, kind, job_name) > 0)",
             "format": "table",
             "instant": true,
@@ -942,8 +942,6 @@ data:
             "refId": "D"
           }
         ],
-        "timeFrom": null,
-        "timeShift": null,
         "title": "SUCCESSFULLY COMPLETED",
         "transformations": [
           {
@@ -1001,7 +999,10 @@ data:
         "type": "table"
       },
       {
-        "datasource": null,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -1010,18 +1011,11 @@ data:
             "custom": {
               "align": "center",
               "displayMode": "auto",
-              "filterable": false
+              "filterable": false,
+              "inspect": false
             },
             "links": [],
-            "mappings": [
-              {
-                "from": "",
-                "id": 1,
-                "text": "",
-                "to": "",
-                "type": 1
-              }
-            ],
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
@@ -1086,84 +1080,39 @@ data:
                   "id": "mappings",
                   "value": [
                     {
-                      "from": "",
-                      "id": 1,
-                      "text": "RUNNING",
-                      "to": "",
-                      "type": 1,
-                      "value": "2"
-                    },
-                    {
-                      "from": "",
-                      "id": 2,
-                      "text": "FAILED",
-                      "to": "",
-                      "type": 1,
-                      "value": "3"
-                    },
-                    {
-                      "from": "",
-                      "id": 3,
-                      "text": "CANCELED",
-                      "to": "",
-                      "type": 1,
-                      "value": "4"
-                    },
-                    {
-                      "from": "",
-                      "id": 4,
-                      "text": "CREATED",
-                      "to": "",
-                      "type": 1,
-                      "value": "5"
-                    },
-                    {
-                      "from": "",
-                      "id": 5,
-                      "text": "WAITING FOR RESOURCE",
-                      "to": "",
-                      "type": 1,
-                      "value": "6"
-                    },
-                    {
-                      "from": "",
-                      "id": 6,
-                      "text": "PREPARING",
-                      "to": "",
-                      "type": 1,
-                      "value": "7"
-                    },
-                    {
-                      "from": "",
-                      "id": 7,
-                      "text": "PENDING",
-                      "to": "",
-                      "type": 1,
-                      "value": "8"
-                    },
-                    {
-                      "from": "",
-                      "id": 8,
-                      "text": "SKIPPED",
-                      "to": "",
-                      "type": 1,
-                      "value": "9"
-                    },
-                    {
-                      "from": "",
-                      "id": 9,
-                      "text": "MANUAL",
-                      "to": "",
-                      "type": 1,
-                      "value": "10"
-                    },
-                    {
-                      "from": "",
-                      "id": 10,
-                      "text": "SCHEDULED",
-                      "to": "",
-                      "type": 1,
-                      "value": "11"
+                      "options": {
+                        "2": {
+                          "text": "RUNNING"
+                        },
+                        "3": {
+                          "text": "FAILED"
+                        },
+                        "4": {
+                          "text": "CANCELED"
+                        },
+                        "5": {
+                          "text": "CREATED"
+                        },
+                        "6": {
+                          "text": "WAITING FOR RESOURCE"
+                        },
+                        "7": {
+                          "text": "PREPARING"
+                        },
+                        "8": {
+                          "text": "PENDING"
+                        },
+                        "9": {
+                          "text": "SKIPPED"
+                        },
+                        "10": {
+                          "text": "MANUAL"
+                        },
+                        "11": {
+                          "text": "SCHEDULED"
+                        }
+                      },
+                      "type": "value"
                     }
                   ]
                 },
@@ -1316,6 +1265,13 @@ data:
         "id": 119,
         "links": [],
         "options": {
+          "footer": {
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
           "showHeader": true,
           "sortBy": [
             {
@@ -1324,9 +1280,13 @@ data:
             }
           ]
         },
-        "pluginVersion": "7.3.1",
+        "pluginVersion": "9.3.0",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
             "expr": "-max(time() - gitlab_ci_pipeline_job_timestamp{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\"}) by (project, ref, job_name, kind) unless max(gitlab_ci_pipeline_job_status{status=~\"success\", project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\"}) by (project, ref, job_name, kind) > 0",
             "format": "table",
             "hide": false,
@@ -1337,6 +1297,10 @@ data:
             "refId": "B"
           },
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
             "expr": "max(gitlab_ci_pipeline_job_duration_seconds{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\"}) by (project, ref, job_name, kind) unless (max(gitlab_ci_pipeline_job_status{status=~\"success\", project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\"}) by (project, ref, job_name, kind) > 0)",
             "format": "table",
             "hide": false,
@@ -1347,6 +1311,10 @@ data:
             "refId": "C"
           },
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
             "expr": "(max(gitlab_ci_pipeline_job_status{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\", status=~\"running\"}) by (project, ref, job_name, kind) * 2) > 0 or\n(max(gitlab_ci_pipeline_job_status{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\", status=~\"failed\"}) by (project, ref, job_name, kind) * 3) > 0 or\n(max(gitlab_ci_pipeline_job_status{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\", status=~\"canceled\"}) by (project, ref, job_name, kind) * 4) > 0 or\n(max(gitlab_ci_pipeline_job_status{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\", status=~\"created\"}) by (project, ref, job_name, kind) * 5) > 0 or\n(max(gitlab_ci_pipeline_job_status{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\", status=~\"waiting_for_resource\"}) by (project, ref, job_name, kind) * 6) > 0 or\n(max(gitlab_ci_pipeline_job_status{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\", status=~\"preparing\"}) by (project, ref, job_name, kind) * 7) > 0 or\n(max(gitlab_ci_pipeline_job_status{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\", status=~\"pending\"}) by (project, ref, job_name, kind) * 8) > 0 or\n(max(gitlab_ci_pipeline_job_status{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\", status=~\"skipped\"}) by (project, ref, job_name, kind) * 9) > 0 or\n(max(gitlab_ci_pipeline_job_status{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\", status=~\"manual\"}) by (project, ref, job_name, kind) * 10) > 0 or\n(max(gitlab_ci_pipeline_job_status{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\", status=~\"scheduled\"}) by (project, ref, job_name, kind) * 11) > 0",
             "format": "table",
             "hide": false,
@@ -1357,6 +1325,10 @@ data:
             "refId": "A"
           },
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
             "expr": "max(gitlab_ci_pipeline_job_id{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\"}) by (project, ref, kind, job_name) unless (max(gitlab_ci_pipeline_job_status{status=~\"success\", project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\", job_name=~\"$JOB\"}) by (project, ref, kind, job_name) > 0)",
             "format": "table",
             "instant": true,
@@ -1365,8 +1337,6 @@ data:
             "refId": "D"
           }
         ],
-        "timeFrom": null,
-        "timeShift": null,
         "title": "RUNNING, FAILED OR NOT COMPLETED",
         "transformations": [
           {
@@ -1411,28 +1381,14 @@ data:
       }
     ],
     "refresh": "",
-    "schemaVersion": 26,
+    "schemaVersion": 37,
     "style": "dark",
     "tags": [],
     "templating": {
       "list": [
         {
-          "current": {
-            "selected": false,
-            "text": "gitlab.com",
-            "value": "gitlab.com"
-          },
-          "error": null,
           "hide": 2,
-          "label": null,
           "name": "GITLAB_HOST",
-          "options": [
-            {
-              "selected": true,
-              "text": "gitlab.com",
-              "value": "gitlab.com"
-            }
-          ],
           "query": "gitlab.com",
           "skipUrlSync": false,
           "type": "constant"
@@ -1448,22 +1404,26 @@ data:
               "$__all"
             ]
           },
-          "datasource": "prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "definition": "label_values(gitlab_ci_pipeline_id, project)",
-          "error": null,
           "hide": 0,
           "includeAll": true,
           "label": "owner",
           "multi": true,
           "name": "OWNER",
           "options": [],
-          "query": "label_values(gitlab_ci_pipeline_id, project)",
+          "query": {
+            "query": "label_values(gitlab_ci_pipeline_id, project)",
+            "refId": "Prometheus-OWNER-Variable-Query"
+          },
           "refresh": 2,
           "regex": "/(.*)\\/.*$/",
           "skipUrlSync": false,
           "sort": 0,
           "tagValuesQuery": "",
-          "tags": [],
           "tagsQuery": "",
           "type": "query",
           "useTags": false
@@ -1479,22 +1439,26 @@ data:
               "$__all"
             ]
           },
-          "datasource": "prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "definition": "label_values(gitlab_ci_pipeline_id{project=~\"($OWNER).*\"}, project)",
-          "error": null,
           "hide": 0,
           "includeAll": true,
           "label": "project",
           "multi": true,
           "name": "PROJECT",
           "options": [],
-          "query": "label_values(gitlab_ci_pipeline_id{project=~\"($OWNER).*\"}, project)",
+          "query": {
+            "query": "label_values(gitlab_ci_pipeline_id{project=~\"($OWNER).*\"}, project)",
+            "refId": "Prometheus-PROJECT-Variable-Query"
+          },
           "refresh": 2,
           "regex": "",
           "skipUrlSync": false,
           "sort": 1,
           "tagValuesQuery": "",
-          "tags": [],
           "tagsQuery": "",
           "type": "query",
           "useTags": false
@@ -1510,22 +1474,26 @@ data:
               "$__all"
             ]
           },
-          "datasource": "prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "definition": "label_values(gitlab_ci_pipeline_id{project=~\"($OWNER).*\",project=~\"$PROJECT\"}, ref)",
-          "error": null,
           "hide": 0,
           "includeAll": true,
           "label": "ref",
           "multi": true,
           "name": "REF",
           "options": [],
-          "query": "label_values(gitlab_ci_pipeline_id{project=~\"($OWNER).*\",project=~\"$PROJECT\"}, ref)",
+          "query": {
+            "query": "label_values(gitlab_ci_pipeline_id{project=~\"($OWNER).*\",project=~\"$PROJECT\"}, ref)",
+            "refId": "Prometheus-REF-Variable-Query"
+          },
           "refresh": 2,
           "regex": "",
           "skipUrlSync": false,
           "sort": 1,
           "tagValuesQuery": "",
-          "tags": [],
           "tagsQuery": "",
           "type": "query",
           "useTags": false
@@ -1541,22 +1509,26 @@ data:
               "$__all"
             ]
           },
-          "datasource": "prometheus",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "definition": "label_values(gitlab_ci_pipeline_job_id{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\"}, job_name)",
-          "error": null,
           "hide": 0,
           "includeAll": true,
           "label": "job",
           "multi": true,
           "name": "JOB",
           "options": [],
-          "query": "label_values(gitlab_ci_pipeline_job_id{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\"}, job_name)",
+          "query": {
+            "query": "label_values(gitlab_ci_pipeline_job_id{project=~\"($OWNER).*\",project=~\"$PROJECT\", ref=~\"$REF\"}, job_name)",
+            "refId": "Prometheus-JOB-Variable-Query"
+          },
           "refresh": 2,
           "regex": "",
           "skipUrlSync": false,
           "sort": 1,
           "tagValuesQuery": "",
-          "tags": [],
           "tagsQuery": "",
           "type": "query",
           "useTags": false
@@ -1564,7 +1536,7 @@ data:
       ]
     },
     "time": {
-      "from": "now-1h",
+      "from": "now-3h",
       "to": "now"
     },
     "timepicker": {
@@ -1592,7 +1564,8 @@ data:
       ]
     },
     "timezone": "",
-    "title": "GitLab CI jobs",
-    "uid": "gitlab_ci_jobs",
-    "version": 2
+    "title": "Github Actions CI jobs",
+    "uid": "gitbub_actions_ci_jobs",
+    "version": 1,
+    "weekStart": ""
     }

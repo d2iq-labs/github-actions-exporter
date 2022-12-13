@@ -30,7 +30,7 @@ var (
 	jobsProcessed = promauto.NewGaugeVec(prometheus.GaugeOpts{
 		Name: "gha_jobs_status",
 		Help: "current status of github actions job",
-	}, []string{"org", "repo", "name"})
+	}, []string{"org", "project", "job_name", "ref", "status"})
 )
 
 func recordMetrics(ctx context.Context, ghClient *github.Client) {

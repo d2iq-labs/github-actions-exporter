@@ -95,3 +95,7 @@ kube-prometheus-stack:
   grafana:
     plugins:
       - grafana-polystat-panel
+  prometheus:
+    prometheusSpec:
+      podMonitorSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false

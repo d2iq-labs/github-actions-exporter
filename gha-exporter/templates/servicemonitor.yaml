@@ -1,7 +1,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ include "gha-exporter.fullname" . }}
+  name: {{ include "gha-exporter.fullname" . }}-monitor
   labels:
     {{- include "gha-exporter.labels" . | nindent 4 }}
 spec:
@@ -15,7 +15,7 @@ spec:
     - {{ .Release.Namespace }}
   endpoints:
   - honorLabels: true
-    targetPort: {{ .Values.service.port }}
+    port: http
     interval: {{ .Values.serviceMonitor.interval }}
     path: /metrics
     scrapeTimeout: {{ .Values.serviceMonitor.timeout }}
