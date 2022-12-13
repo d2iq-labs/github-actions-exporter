@@ -1,0 +1,22 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "gha-exporter.fullname" . }}
+  labels:
+    {{- include "gha-exporter.labels" . | nindent 4 }}
+spec:
+  jobLabel: gha-exporter-monitoring-job
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: gha-exporter
+      app.kubernetes.io/name: gha-exporter
+  namespaceSelector:
+    matchNames:
+    - {{ .Release.Namespace }}
+  endpoints:
+  - honorLabels: true
+    targetPort: {{ .Values.service.port }}
+    interval: {{ .Values.serviceMonitor.interval }}
+    path: /metrics
+    scrapeTimeout: {{ .Values.serviceMonitor.timeout }}
+  

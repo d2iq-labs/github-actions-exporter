@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: exporter-github-token
+data:
+  github_token: {{ .Values.github_token | b64enc }}
