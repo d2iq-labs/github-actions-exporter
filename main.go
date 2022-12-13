@@ -1,28 +1,33 @@
 package main
 
 import (
+	"context"
+	"fmt"
 	"log"
-	"os"
 
-	"github.com/urfave/cli/v2"
-
-	"github.com/spendesk/github-actions-exporter/pkg/config"
-	"github.com/spendesk/github-actions-exporter/pkg/server"
-)
-
-var (
-	version = "development"
+	"github.com/d2iq-labs/github-actions-exporter/pkg/github"
 )
 
 func main() {
-	app := cli.NewApp()
-	app.Name = "github-actions-exporter"
-	app.Flags = config.InitConfiguration()
-	app.Version = version
-	app.Action = server.RunServer
-
-	err := app.Run(os.Args)
+	ctx := context.Background()
+	ghClient, err := github.NewClient(ctx)
+	if err != nil {
+		log.Fatal("unable to initialize github client:", err)
+	}
+	workflows, err := ghClient.GetAllWorkflows(ctx, "mesosphere", "konvoy2")
 	if err != nil {
 		log.Fatal(err)
 	}
+	for _, w := range workflows {
+		fmt.Printf("workflow id: %s\n", *w.Name)
+	}
+
+	jobs, err := ghClient.GetAllWorkflowJobs(ctx, "mesosphere", "konvoy2")
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, j := range jobs {
+		fmt.Printf("workflow job: %s\n", *j.Name)
+	}
+
 }
